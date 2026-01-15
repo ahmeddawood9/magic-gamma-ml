@@ -3,23 +3,31 @@ main.py
 
 Responsibility:
 - Run the data pipeline
-- No models yet
+- Call models (plug-in style)
 
 Concept:
 Pipeline orchestration only
-(models will be plugged in later)
+(models are plugged in as modules)
 """
 
-from preprocessing import load_data
-from visualize import plot_features
-from split_scale import split_dataset, scale_dataset
 
+
+from src.preprocessing import load_data
+from src.visualize import plot_features
+from src.split_scale import split_dataset, scale_dataset
+
+# Models are now inside src/models/, so we import from src.models
+# (Make sure these files exist, or comment them out if they don't yet)
+from src.knn_model import run_knn
+from src.naive_bayes_model import run_naive_bayes
 
 def main():
-    # Load and preprocess dataset
+    # Load dataset
+    # Note: Path is relative to where you run the command (project root)
     df = load_data("data/magic04.data")
 
-    # Visualize feature distributions
+    # Visualize features
+    # (Ensure visualize.py has a function named plot_features)
     plot_features(df)
 
     # Split dataset
@@ -35,6 +43,14 @@ def main():
     print("Train:", X_train.shape, y_train.shape)
     print("Validation:", X_valid.shape, y_valid.shape)
     print("Test:", X_test.shape, y_test.shape)
+
+    # ================================
+    # RUN MODELS
+    # ================================
+
+    # Passing the processed data to the models
+    run_knn(X_train, y_train, X_test, y_test, k=5)
+    run_naive_bayes(X_train, y_train, X_test, y_test)
 
 
 if __name__ == "__main__":
