@@ -1,69 +1,79 @@
-# MAGIC Gamma vs Hadron Classification – Preprocessing Pipeline
+# MAGIC Gamma vs Hadron Classification
 
-> **Note:** This repository currently contains only the preprocessing and data preparation pipeline.  
-> Machine learning models (KNN, SVM, Neural Networks, etc.) will be added later.
+> **Project Status:** Active
+> Pipeline now includes **Preprocessing**, **k-Nearest Neighbors (kNN)**, and **Naive Bayes** classification.
 
 ---
 
 ## Overview
 
-This project demonstrates a clean, scalable machine learning pipeline using the MAGIC Gamma Telescope dataset.  
-The focus at this stage is **data preprocessing**, which is critical for building accurate and reliable ML models.
+This project implements a complete machine learning pipeline for the MAGIC Gamma Telescope dataset. The goal is to classify particle events as either **Gamma (signal)** or **Hadron (background noise)**.
 
-The current pipeline handles:
-- Loading raw data
-- Cleaning and converting labels
-- Visualizing feature distributions
-- Splitting dataset into train, validation, and test sets
-- Scaling features
-- Handling class imbalance (training set only)
+The project features a modular architecture separating data preprocessing, visualization, and model implementation.
 
 ---
 
 ## Dataset
 
-- **Name:** MAGIC Gamma Telescope Dataset  
-- **Source:** UCI Machine Learning Repository  
-- **Task:** Classify particle events as:
+- **Name:** MAGIC Gamma Telescope Dataset
+- **Source:** UCI Machine Learning Repository
+- **Task:** Binary Classification
   - `gamma (1)` → signal
   - `hadron (0)` → background noise
-
-The dataset has **10 continuous features** and **1 class label**.
+- **Features:** 10 continuous features (fLength, fWidth, fSize, etc.)
 
 ---
 
-## Current Pipeline (Preprocessing Stage)
+## Project Pipeline
 
-### 1. Data Loading
-- Load raw CSV data from `data/magic04.data`
-- Assign descriptive column names
-- Convert string class labels (`g` / `h`) into numeric (`1` / `0`)
+### 1. Data Loading & Cleaning
+- Loads raw CSV data from `data/magic04.data`.
+- Converts categorical labels (`g` / `h`) into numeric format (`1` / `0`).
 
 ### 2. Feature Visualization
-- Generate histograms for each feature
-- Compare gamma vs hadron distributions
-- Plots are saved in `outputs/plots/`  
-  *(Useful for exploratory data analysis and understanding separability)*
+- Generates probability density histograms for all 10 features.
+- Visualizes the separation between Gamma and Hadron events.
+- **Output:** Plots are saved in `outputs/plots/`.
 
-### 3. Train / Validation / Test Split
-- Dataset is **shuffled** to avoid bias
-- Split proportions:
-  - 60% Training
-  - 20% Validation
-  - 20% Test
-- Ensures fair evaluation later
+### 3. Data Splitting
+- **60% Training**: Used for model fitting.
+- **20% Validation**: Used for tuning.
+- **20% Testing**: Used for final evaluation.
 
-### 4. Feature Scaling
-- StandardScaler is applied to make features **mean = 0, std = 1**
-- Prevents features with large numeric ranges from dominating learning
+### 4. Preprocessing (Scaling & Balancing)
+- **Feature Scaling:** StandardScaler (mean = 0, std = 1) is applied to normalize feature ranges.
+- **Class Balancing:** RandomOverSampler is applied **only to the training set** to handle class imbalance, ensuring models don't become biased toward the majority class.
 
-### 5. Handling Class Imbalance
-- RandomOverSampler applied **only on training data**
-- Ensures training set is balanced while validation and test sets remain realistic
+### 5. Classification Models
+The following models have been implemented and integrated into `main.py`:
+
+* **k-Nearest Neighbors (kNN)**
+    * Uses Euclidean distance.
+    * Current setting: `k=5`.
+    * Standard classifier for pattern recognition based on feature proximity.
+
+* **Naive Bayes**
+    * Gaussian Naive Bayes implementation.
+    * Assumes feature independence; effective for high-dimensional data baselines.
 
 ---
 
-## Current Outputs
+## How to Run
 
-### Plots
-Saved in `outputs/plots/`:
+1.  **Install Dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+2.  **Run the Pipeline:**
+    Execute the main script from the project root:
+    ```bash
+    python -m src.main
+    ```
+
+---
+
+## Outputs
+
+* **Console:** Prints dataset shapes and classification reports (Precision, Recall, F1-Score) for both models.
+* **Files:** Feature distribution plots saved in `outputs/plots/`.
