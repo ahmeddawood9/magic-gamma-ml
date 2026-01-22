@@ -1,5 +1,13 @@
+﻿# Data Manipulation & Analysis
 numpy
 pandas
+
+# Visualization
 matplotlib
+
+# Machine Learning & Preprocessing
 scikit-learn
 imbalanced-learn
+
+# Deep Learning (Modern Keras 3.x)
+tensorflow
