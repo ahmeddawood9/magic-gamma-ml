@@ -44,7 +44,7 @@ Prerequisites
 
 Installation
 
-    Clone the repository: git clone https://github.com/yourusername/magic-gamma-ml.git
+    Clone the repository: git clone https://github.com/ahmeddawood9/magic-gamma-ml.git
 
     Create and activate a virtual environment: python -m venv venv && source venv/bin/activate
 
