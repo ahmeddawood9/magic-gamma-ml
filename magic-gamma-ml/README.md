@@ -25,14 +25,7 @@ I implemented a suite of models to compare different mathematical approaches to 
     k-Nearest Neighbors (KNN): A distance-based approach to observe how local clusters form in the feature space.
 
     Naive Bayes: A probabilistic baseline used to test the assumption of feature independence.
-Results
-Comparative Metrics
-Model Architecture	           Accuracy	Macro F1-Score	Recall (Class 0)
-Support Vector Machine (SVM)	0.86	0.84	0.79
-Neural Network (MLP)	        0.85	0.83	0.82
-k-Nearest Neighbors	            0.80	0.78	0.72
-Logistic Regression	            0.78	0.76	0.71
-Naive Bayes	                    0.72	0.65	0.39
+
 
 Implementation Details
 
