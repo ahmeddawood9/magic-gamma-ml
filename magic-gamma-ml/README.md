@@ -27,14 +27,12 @@ I implemented a suite of models to compare different mathematical approaches to 
     Naive Bayes: A probabilistic baseline used to test the assumption of feature independence.
 Results
 
-The models are evaluated on a held-out test set (20% of total data) to ensure generalization.
-Model	Accuracy	Macro F1-Score	Note
-SVM	0.86	0.84	Superior handling of complex decision boundaries.
-Neural Network	0.85	0.83	Optimized via grid search and regularization.
-KNN	0.80	0.78	Solid performance but high inference cost.
-Logistic Regression	0.78	0.76	Demonstrates the data is not strictly linear.
-Naive Bayes	0.72	0.65	Struggles with correlated telescope features.
-
+Model Architecture,Accuracy,Macro F1-Score,Recall (Class 0)
+Support Vector Machine (SVM),0.86,0.84,0.79
+Neural Network (MLP),0.85,0.83,0.82
+k-Nearest Neighbors,0.80,0.78,0.72
+Logistic Regression,0.78,0.76,0.71
+Naive Bayes,0.72,0.65,0.39
 
 Implementation Details
 
